@@ -11,13 +11,21 @@ echo "Scanning directory: $input_dir"
 for file in "$input_dir"/One\ Piece\ v*; do
     # Extract volume number
     volume=$(echo "$file" | sed -E 's/.*One Piece v([0-9]+) .*/\1/')
-
+    
     # Unzip CBZ archive into the shared folder (overwrite previous files)
     rm -rf "$extract_dir"/*  # Clear previous images
     unzip -q "$file" -d "$extract_dir"
 
+    # Convert the front page
+    for pic in "$extract_dir"/*.jpg; do
+        picname=$(basename "$pic" .jpg)
+        magick "$pic" -colorspace Gray "$extract_dir/${picname}.png"
+    done
+    
     # Convert extracted images to PDF
-    img2pdf "$extract_dir"/*.png "$extract_dir"/*.jpg -o "$output_dir/OnePiece v$volume.pdf"
+    name="$output_dir/OnePiece v$volume.pdf"
+    img2pdf "$extract_dir"/*.png -o "$name"
+    qpdf --linearize --optimize-images --replace-input "$name"
 
     echo "Processed Volume $volume: OnePiece - $volume.pdf"
 done
