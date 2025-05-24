@@ -32,7 +32,7 @@ merge_img(){
 done
 }
 
-for file in "$input_dir"/Naruto\ \(CM\)\ v01*; do
+for file in "$input_dir"/Naruto\ \(CM\)\ v*; do
 	# Extract volume number
 	volume=$(echo "$file" | sed -E 's/.*v([0-9]+)\.cbz/\1/')
 	name="$output_dir/Naruto v$volume.pdf"
