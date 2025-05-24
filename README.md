@@ -10,7 +10,10 @@ Darwin Mac 24.1.0 Darwin Kernel Version 24.1.0: Thu Nov 14 18:19:02 PST 2024; ro
 
 ### Media
 
-We subscribe to [VIZ](https://www.viz.com/) but it doesn't provide the pictures so we use a tier provider [1r0n](https://nyaa.si/view/1943212).
+We subscribe to [Manga PLus](https://www.viz.com/](https://mangaplus.shueisha.co.jp/updates)) but it doesn't provide the pictures so we use a tier providers 
+- [OnePiece](https://nyaa.si/view/1943212)
+- [Naruto](https://nyaa.si/view/1619360)
+
 
 ### Applications
 ```Bash
@@ -20,9 +23,11 @@ brew install qpdf:w
 chmod +x script.sh
 ```
 We tried to use MacOS tools, `shortcuts` and `automator` it proved to be a massive waste of time.
+
 ## Usage
+
 To create the PDFs:
 ```Bash
-./script.sh
+./script_[name].sh
 ```
 Then we use Amazon website to send to [Kindle](https://www.amazon.com/sendtokindle).
