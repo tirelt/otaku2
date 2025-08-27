@@ -9,29 +9,43 @@ extract_dir="$HOME/Documents/Naruto/extract_dir"
 echo "Scanning directory: $input_dir"
 
 merge_img(){
-	 # Initialize counter for sequential naming
-	 local counter=1
+    # Initialize counter for sequential naming
+    local counter=1
 
-	 # Process folders in numerical order (1, 2, 3, ...)
-	 for folder in $(find "$extract_dir" -maxdepth 1 -type d -name '[0-9]*' | sort -n); do
-	 if [[ -d "$folder" ]]; then
-		  # Process PNG files in each folder
-		  for file in "$folder"/*.jpg; do
-				if [[ -f "$file" ]]; then
-                # Generate new filename with leading zeros (e.g., 01.png)
-                new_name=$(printf "%02d.png" "$counter")
-                # Move and rename file to output directory
-                mv "$file" "$extract_dir/$new_name" && {
-                    ((counter++))
-                } 
-				fi
-        done
-    else
-        echo "Warning: $folder is not a directory, skipping"
-    fi
-done
+    # Create a temporary file to store folder names and their numbers
+    local temp_file
+    temp_file=$(mktemp)
+
+    # Find directories and extract the first number from each name
+    find "$extract_dir" -maxdepth 1 -type d ! -path "$extract_dir" -print0 | while IFS= read -r -d '' folder; do
+        number=$(basename "$folder" | grep -o -E '[0-9]+' | head -1)
+        if [[ -n "$number" ]]; then
+            echo "$number $folder" >> "$temp_file"
+        fi
+    done
+
+    # Process folders in numerical order based on extracted numbers
+    sort -n "$temp_file" | while IFS=' ' read -r number folder; do
+        if [[ -d "$folder" ]]; then
+            # Process PNG files in each folder
+            for file in "$folder"/*.jpg; do
+                if [[ -f "$file" ]]; then
+                    # Generate new filename with leading zeros (e.g., 01.png)
+                    new_name=$(printf "%02d.png" "$counter")
+                    # Move and rename file to output directory
+                    mv "$file" "$extract_dir/$new_name" && {
+                        ((counter++))
+                    } 
+                fi
+            done
+        else
+            echo "Warning: $folder is not a directory, skipping"
+        fi
+    done
+
+    # Clean up temporary file
+    rm "$temp_file"
 }
-
 for file in "$input_dir"/Naruto\ \(CM\)\ v*; do
 	# Extract volume number
 	volume=$(echo "$file" | sed -E 's/.*v([0-9]+)\.cbz/\1/')
