@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/opt/homebrew/bin/bash
 
 # Set the target directory for all images
 input_dir="$HOME/Documents/Naruto/Naruto"
@@ -31,7 +31,7 @@ merge_img(){
             for file in "$folder"/*.jpg; do
                 if [[ -f "$file" ]]; then
                     # Generate new filename with leading zeros (e.g., 01.png)
-                    new_name=$(printf "%02d.png" "$counter")
+                    new_name=$(printf "%03d.png" "$counter")
                     # Move and rename file to output directory
                     mv "$file" "$extract_dir/$new_name" && {
                         ((counter++))
@@ -66,7 +66,6 @@ for file in "$input_dir"/Naruto\ \(CM\)\ v*; do
 	   
     # Convert the front page
     for pic in "$extract_dir"/*.png; do
-        picname=$(basename "$pic" .png)
         magick "$pic" -colorspace Gray "$pic"
 	done
 

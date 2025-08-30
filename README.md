@@ -36,3 +36,13 @@ Then we use Amazon website to send to [Kindle](https://www.amazon.com/sendtokind
 
 - Naruto
 - OnePiece
+
+## Debug
+
+- Install the extension `Bash Debug` and `BashCheck` for `VSCode`
+- Install `bashdb`
+
+```Bash
+sudo apt install bashdb
+brew install bashdb
+```

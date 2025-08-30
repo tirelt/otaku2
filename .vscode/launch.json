@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "Debug script",
+            "program": "${workspaceFolder}/script_naruto.sh",
+            "args": [], // Add any script arguments here
+            "terminalKind": "integrated",
+            "pathBash": "/opt/homebrew/bin/bash",
+            //"trace": true
+        }
+    ]
+}
