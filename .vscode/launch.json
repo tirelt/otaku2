@@ -9,7 +9,7 @@
             "type": "bashdb",
             "request": "launch",
             "name": "Debug script",
-            "program": "${workspaceFolder}/script_naruto.sh",
+            "program": "${workspaceFolder}/script_deliciousindungeon.sh",
             "args": [], // Add any script arguments here
             "terminalKind": "integrated",
             "pathBash": "/opt/homebrew/bin/bash",

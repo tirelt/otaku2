@@ -13,6 +13,7 @@ Darwin Mac 24.1.0 Darwin Kernel Version 24.1.0: Thu Nov 14 18:19:02 PST 2024; ro
 We subscribe to [Manga PLus](https://www.viz.com/](https://mangaplus.shueisha.co.jp/updates)) but it doesn't provide the pictures so we use tier providers 
 - [OnePiece](https://nyaa.si/view/1943212)
 - [Naruto](https://nyaa.si/view/1619360)
+- [DeliciousInDungeon](https://nyaa.si/view/1849177)
 
 
 ### Applications

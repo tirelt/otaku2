@@ -59,7 +59,7 @@ for file in "$input_dir"/Naruto\ \(CM\)\ v*; do
 	echo "Processing Volume $volume..."
 
 	# Unzip CBZ archive into the shared folder (overwrite previous files)
-	rm -rf "$extract_dir"/*  # Clear previous images
+    rm -rf "${extract_dir:?}"/* # Clear previous images
 	unzip -q "$file" -d "$extract_dir"
 
 	merge_img

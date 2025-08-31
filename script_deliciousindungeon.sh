@@ -1,17 +1,20 @@
-#!/bin/bash
+#!/opt/homebrew/bin/bash
 
 # Directory containing CBZ archives
-input_dir="$HOME/Documents/OnePiece/One Piece (Digital) (1r0n)"
-output_dir="$HOME/Documents/OnePiece"
-extract_dir="$HOME/Documents/OnePiece/extract_folder"
+input_dir="$HOME/Documents/DeliciousInDungeon/Delicious in Dungeon (2017-2024) (Digital) (1r0n)"
+output_dir="$HOME/Documents/DeliciousInDungeon"
+extract_dir="$HOME/Documents/DeliciousInDungeon/extract_folder"
+
+# Ensure extract_dir exists
+mkdir -p "$extract_dir"
 
 # Loop through all CBZ files
 echo "Scanning directory: $input_dir"
 
-for file in "$input_dir"/One\ Piece\ v*; do
+for file in "$input_dir"/Delicious\ in\ Dungeon\ v*; do
     # Extract volume number
-    volume=$(echo "$file" | sed -E 's/.*One Piece v([0-9]+) .*/\1/')
-    name="$output_dir/OnePiece v$volume.pdf"
+    volume=$(echo "$file" | sed -E 's/.*Delicious in Dungeon v([0-9]+) .*/\1/')
+    name="$output_dir/DeliciousInDungeon v$volume.pdf"
     
     # Check if the PDF already exists
     if [ -f "$name" ]; then
@@ -27,7 +30,7 @@ for file in "$input_dir"/One\ Piece\ v*; do
 
     # Convert the front page
     for pic in "$extract_dir"/*.jpg; do
-        picname=$(basename "$pic" .jpg)
+        picname=$(echo "$pic" | sed -E 's/.*- p([0-9]{3}).*/\1/')
         magick "$pic" -colorspace Gray "$extract_dir/${picname}.png"
     done
     
